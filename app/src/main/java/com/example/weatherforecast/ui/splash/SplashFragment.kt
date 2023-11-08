@@ -83,10 +83,8 @@ class SplashFragment : BaseFragment(false) {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
-                // Permission is granted, handle the case
                 checkGPS()
             } else {
-                // Permission denied, handle the case
                showDialog()
             }
         }
