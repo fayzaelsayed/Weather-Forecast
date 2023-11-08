@@ -2,8 +2,10 @@ package com.example.weatherforecast.ui.splash
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -14,8 +16,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import com.example.weatherforecast.R
@@ -38,6 +38,7 @@ class SplashFragment : BaseFragment(false) {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lat = ""
     private var long = ""
+    private var firstVisit = true
 
     @Inject
     lateinit var globalHelper: GlobalHelper
@@ -69,7 +70,8 @@ class SplashFragment : BaseFragment(false) {
 
         if (lat.isNotEmpty() && long.isNotEmpty()) {
             Handler().postDelayed({
-                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                val action = R.id.action_splashFragment_to_homeFragment
+                findNavController().navigate(action)
             }, 3000)
         } else {
             checkLocationPermission()
@@ -80,14 +82,6 @@ class SplashFragment : BaseFragment(false) {
         return binding.root
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) {
-                checkGPS()
-            } else {
-               showDialog()
-            }
-        }
 
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
@@ -97,10 +91,13 @@ class SplashFragment : BaseFragment(false) {
         ) {
             checkGPS()
         } else {
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
         }
     }
-
 
 
     private fun checkGPS() {
@@ -149,13 +146,6 @@ class SplashFragment : BaseFragment(false) {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return
         }
         fusedLocationProviderClient.lastLocation.addOnSuccessListener {
@@ -186,7 +176,10 @@ class SplashFragment : BaseFragment(false) {
         saveButton.text = saveButton.context.resources.getString(R.string.ok)
         saveButton.setOnClickListener {
             builder.dismiss()
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri = Uri.fromParts("package", requireActivity().packageName, null)
+            intent.data = uri
+            startActivity(intent)
         }
 
         cancelButton.setOnClickListener {
@@ -195,5 +188,22 @@ class SplashFragment : BaseFragment(false) {
         }
 
         builder.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (firstVisit) {
+            firstVisit = false
+        } else {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                checkGPS()
+            } else {
+                showDialog()
+            }
+        }
     }
 }
