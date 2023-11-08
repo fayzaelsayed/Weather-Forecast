@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Weather Forecast</string>
+    <string name="home">الرئيسية</string>
+    <string name="favorites">المفضلات</string>
+    <string name="alerts">التنبيهات</string>
+    <string name="settings">الإعدادات</string>
+    <string name="temperature">درجة الحرارة</string>
+    <string name="wind_speed">سرعة الرياح</string>
+    <string name="language">اللغة</string>
+    <string name="english">الإنجيليزية</string>
+    <string name="arabic">العربية</string>
+    <string name="celsius">سيليزيس</string>
+    <string name="kelvin">كلفن</string>
+    <string name="fahrenheit">فهرنهايت</string>
+    <string name="meter_sec">متر/ ثانية</string>
+    <string name="mile_hour">ميل / ساعة</string>
+    <string name="save">حفظ</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="pressure">الضغط</string>
+    <string name="cloud">الغيوم</string>
+    <string name="ultra_violet">الأشعة فوق البنفسجية</string>
+    <string name="visibility">الرؤية</string>
+    <string name="sunrise">شروق الشمس</string>
+    <string name="weather_for_next_48_hours">ال ٤٨ ساعة المقبلة</string>
+    <string name="weather_for_the_next_7_days">ال٧ ايام المقبلة</string>
+    <string name="no_places">لا يوجد أماكن</string>
+    <string name="cancel">إلغاء</string>
+    <string name="sunset">غروب الشمس</string>
+    <string name="today">اليوم</string>
+    <string name="ok">موافق</string>
+    <string name="celsius_text">°س</string>
+    <string name="warning">لابد من السماح لweather forecast بالدخول علي موقع هذا الجهاز للعمل</string>
+    <string name="fahrenheit_text">°ف</string>
+    <string name="kelvin_text">°ك</string>
+</resources>

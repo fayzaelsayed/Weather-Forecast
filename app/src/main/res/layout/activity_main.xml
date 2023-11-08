@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_black"
+        tools:context=".ui.MainActivity">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/myNavHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:navGraph="@navigation/nav_graph" />
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/light_black"
+                    app:cardCornerRadius="@dimen/_20sdp"
+                    app:elevation="0dp">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@drawable/gradient_background_cards"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat">
+
+                        <TextView
+                            android:id="@+id/tv_toolbar_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                            android:textColor="@color/white" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+
+<!--            <com.google.android.material.appbar.CollapsingToolbarLayout-->
+<!--                android:id="@+id/collapsing_toolbar"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:backgroundTint="@color/light_black"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
+
+<!--                &lt;!&ndash; Add your collapsing toolbar content here &ndash;&gt;-->
+
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/toolbar"-->
+<!--                    android:background="@drawable/gradient_background_cards"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    app:layout_collapseMode="pin"-->
+<!--                    app:popupTheme="@style/ThemeOverlay.AppCompat"-->
+<!--                   android:textAlignment="center"-->
+<!--                    app:titleTextColor="@color/white" />-->
+
+<!--            </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/lighter_black"
+            app:fabCradleMargin="@dimen/_5sdp"
+            app:fabCradleRoundedCornerRadius="20dp">
+
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:background="@android:color/transparent"
+                app:itemIconTint="@drawable/nav_item_color_selected"
+                app:itemRippleColor="@color/dark_blue"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/bottom_nav_menu">
+
+
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_background_cards"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/location"
+            app:layout_anchor="@id/bottomAppBar" />
+
+        <!-- Additional options -->
+        <LinearLayout
+            android:id="@+id/optionsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_anchor="@id/fab"
+            app:layout_anchorGravity="top|center">
+
+            <!-- Add more buttons or views here for additional options -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:backgroundTint="@color/dark_blue"
+                app:elevation="6dp"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/map" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_current_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:backgroundTint="@color/dark_blue"
+                app:elevation="6dp"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/my_location_gps" />
+
+            <!-- You can add more options here as needed -->
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
