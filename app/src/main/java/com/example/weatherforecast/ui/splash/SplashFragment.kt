@@ -99,7 +99,6 @@ class SplashFragment : BaseFragment(false) {
         ) {
             checkGPS()
         } else {
-
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
